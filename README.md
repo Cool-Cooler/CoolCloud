@@ -7,4 +7,4 @@ As stated in our presentation, the flow for the cloud communications aspect of o
 
 We have implemented our system in AWS.
 
-HTTPS protocol was used for communication between the ESP and Lambda functions. In hindsight, MQTT may have been prefereable as this would have enabled easy use of the subscribe/publish feature, as well as take adantage of the efficiencies of MQTT over HTTPS for smaller, data-centric connections.
+HTTPS protocol was used for communication between the ESP and Lambda functions. In hindsight, MQTT may have been prefereable as this would have enabled two-way communication and easy use of the subscribe/publish feature, as well as take adantage of the efficiencies of MQTT over HTTPS for smaller, data-centric connections.
