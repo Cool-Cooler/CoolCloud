@@ -31,16 +31,22 @@ exports.handler = async (event, context, callback) => {
       data.Items.sort(function(a, b){
         return parseInt(b.created_on.S) - parseInt(a.created_on.S)
       });
-      const element = data.Items[0];
+      const elementList = []
       
-      var thing_list = []
-      for (const th of element.obj_list.L){
-        thing_list.push(JSON.parse(th.S))
+      
+      for (var i =0 ;i<3 && data.Items.length > i; i++){
+        var element = data.Items[i];
+        
+        var thing_list = []
+        for (const th of element.obj_list.L){
+          thing_list.push(JSON.parse(th.S))
+        }
+        elementList.push({
+          img_link : `https://${element.bucket_name.S}.s3-${process.env.AWS_REGION}.amazonaws.com/${element.device_id.S}/${element.img_name.S}`,
+          obj_list : thing_list
+        });
       }
-      response = {
-        img_link : `https://${element.bucket_name.S}.s3-${process.env.AWS_REGION}.amazonaws.com/${element.device_id.S}/${element.img_name.S}`,
-        obj_list : thing_list
-      }
+      response["content_list"] = elementList;
     }
   }).promise();
   
